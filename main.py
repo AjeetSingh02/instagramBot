@@ -118,7 +118,8 @@ class InstaBot:
         # Close the driver
         self.driver.quit()
 
-
+        
+# Replace "yamlFilePath.yml" with the path of credentials.yaml file
 credentialsPath = "yamlFilePath.yml"
 
 with open(credentialsPath, "r") as yamlFile:
