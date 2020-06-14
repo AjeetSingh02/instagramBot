@@ -4,7 +4,6 @@ A Simple Python bot which will sign-in to Instagram and compare the *Followers* 
 
 
 Steps to run:
-
 1. Install the packages in requirements.txt.
 2. Download Chrome driver from this [site](https://chromedriver.chromium.org/downloads) and unzip it.
 3. Provide the path of Chrome driver in main.py.
@@ -12,8 +11,7 @@ Steps to run:
 5. Mention the Instagram user name(s) in main.py for which you want to know the accounts who don't follow it back. You can mention the same user name mentioned in credentials.yml too. 
 
 
-Date of coding: 14th June 2020
-
+Date of coding: 14th June 2020 <br>
 Note: Due to Instagram UI changes in the future, the code can break (Will try to keep it updated).
 
 
