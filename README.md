@@ -1,6 +1,6 @@
 # instagramBot
 
-A Simple Python bot which will sign-in to Instagram and compare the *Followers* and *Following* to give you the accounts which don't follow back
+A Simple Python bot which will sign-in to Instagram and compare the *Followers* and *Following* to give you the accounts which don't follow back.
 
 
 Steps to run:
