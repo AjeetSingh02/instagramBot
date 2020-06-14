@@ -31,12 +31,9 @@ class InstaBot:
         self.driver.find_element_by_xpath(
             "/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div[4]"
             ).click()
-
         sleep(3)
         
-    
     def getUnfollowers(self, userId):
-
         try:
             #Navigate to profile and followers
             self.driver.get(f"https://www.instagram.com/{userId}/")
@@ -71,7 +68,6 @@ class InstaBot:
         # Close followers box
         self.driver.find_elements_by_xpath("/html/body/div[4]/div/div/div[1]/div/div[2]/button")[0].click()
         sleep(1)
-
 
         # Click on following
         self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[3]/a").click()
@@ -128,7 +124,6 @@ with open(credentialsPath, "r") as yamlFile:
     id = cred["ID"]
     password = cred["Password"]
 
-
 # Login
 myBot = InstaBot(id, password)
 
@@ -139,10 +134,8 @@ uIdList = ["usernames1", "usernames2", "usernames3", "usernames4"]
 
 for uid in uIdList:
     print(f"This is the current id: {uid}")
-    myBot.getUnfollowers(uid) 
-    print("------------------------------------------------------")
-    print()
-
+    myBot.getUnfollowers(uid)
+    
 # Close
 myBot.close()  
 
