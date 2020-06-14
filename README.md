@@ -12,6 +12,6 @@ Steps to run:
 5. Mention the Instagram user name(s) in main.py for which you want to know the accounts who don't follow it back. You can mention the same user name mentioned in credentials.yml too. 
 
 
-Date of coding: 15th June 2020
+Date of coding: 14th June 2020
 
 Note: Due to Instagram UI changes in the future, the code can break (Will try to keep it updated).
