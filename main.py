@@ -57,7 +57,7 @@ class InstaBot:
             sleep(1)
             print("Extracting friends %",round((i/(numFollowers/2)*100),2),"from","%100")
 
-        # Get the all the followers
+        # Get all the followers
         fList  = self.driver.find_elements_by_xpath("//div[@class='PZuss']//li")
         
         # Get the user names of all the followers
@@ -80,17 +80,17 @@ class InstaBot:
         # Number of following
         numFollowing = int(self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[3]/a/span").text.replace(",","")) 
 
-        # TO scroll till last in the follower box
+        # TO scroll till last in the following box
         followingBox  = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
         for i in range(int(numFollowing/2)): 
             self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', followingBox)
             sleep(1)
             print("Extracting friends %",round((i/(numFollowing/2)*100),2),"from","%100")
 
-        # Get the all the followers
+        # Get all the following
         fList  = self.driver.find_elements_by_xpath("//div[@class='PZuss']//li")
         
-        # Get the user names of all the followers
+        # Get the user names of all the follwoing accounts
         followingList = []
         for ele in fList:
             txt = ele.text
@@ -139,7 +139,7 @@ uIdList = ["usernames1", "usernames2", "usernames3", "usernames4"]
 for uid in uIdList:
     print(f"This is the current id: {uid}")
     myBot.getUnfollowers(uid) 
-    print("-----------------------------------------------------------------------")
+    print("------------------------------------------------------")
     print()
 
 # Close
