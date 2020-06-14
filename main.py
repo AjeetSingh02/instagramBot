@@ -12,6 +12,7 @@ class InstaBot:
         chromeOptions = webdriver.ChromeOptions()
         chromeOptions.add_argument("--incognito")
 
+        # Replace 'ChromeDriverPath' with chrome driver's path in your local
         self.driver = webdriver.Chrome(executable_path='ChromeDriverPath', chrome_options=chromeOptions)
         self.driver.get("https://instagram.com/")
         sleep(2)
