@@ -17,6 +17,7 @@ Date of coding: 14th June 2020 <br>
 Note: Due to Instagram UI changes in the future, the code can break (Will try to keep it updated).
 
 <br><br>
+
 A big thanks to these sources:
 1. https://www.youtube.com/watch?v=d2GBO_QjRlo&t=525s
 2. https://stackoverflow.com/questions/54173603/how-to-scroll-down-in-an-instagram-pop-up-frame-with-selenium
