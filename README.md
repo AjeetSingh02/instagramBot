@@ -14,4 +14,4 @@ Steps to run:
 
 Date of coding: 15th June 2020
 
-Note: Due to Instagram UI changes in the future, the code can break.
+Note: Due to Instagram UI changes in the future, the code can break (Will try to keep it updated).
