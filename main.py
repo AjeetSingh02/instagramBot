@@ -102,7 +102,7 @@ class InstaBot:
 
         fileName = userId.replace(".","")
 
-        with open(fileName, "w") as out:
+        with open(f"{fileName}.txt", "w") as out:
             out.write(f"Number of accounts who follows you: {len(followersList)}\n")
             out.write(f"Number of accounts you are following: {len(followingList)}\n")
             out.write(f"Number of accounts who doesn't follow back {len(unFollowingList)}\n")
