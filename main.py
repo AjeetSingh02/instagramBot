@@ -1,5 +1,3 @@
-import sys
-import ast
 import yaml
 import simplejson
 from time import sleep, time
@@ -15,23 +13,23 @@ class InstaBot:
         chromeOptions = webdriver.ChromeOptions()
         chromeOptions.add_argument("--incognito")
 
-        self.driver = webdriver.Chrome(executable_path='', chrome_options=chromeOptions)
+        self.driver = webdriver.Chrome(executable_path='chromedriver_win32\chromedriver.exe', chrome_options=chromeOptions)
         self.driver.get("https://instagram.com/")
         sleep(2)
 
         # Enter user name
         self.driver.find_element_by_xpath(
-            "/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div[2]/div/label/input"
+            "/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[1]/div/label/input"
             ).send_keys(username)
 
         # Enter password
         self.driver.find_element_by_xpath(
-            "/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div[3]/div/label/input"
+            "/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[2]/div/label/input"
             ).send_keys(pw)
 
         # Click on Login button
         self.driver.find_element_by_xpath(
-            "/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div[4]"
+            "/html/body/div[1]/section/main/article/div[2]/div[1]/div[2]/form/div/div[3]"
             ).click()
 
         sleep(3)
@@ -45,23 +43,28 @@ class InstaBot:
         except Exception as e:
             print(f"Username or Password are incorrect: {e}")
 
-        # Click on followers
-        self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[2]/a").click()
         sleep(5)
 
         # Number of followers
-        numFollowers = int(self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[2]/a/span").text.replace(",","")) 
+        numFollowers = int(self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[1]/div/div/div/div[1]/div[1]/section/main/div/header/section/ul/li[2]/a/div/span").text.replace(",","")) 
+
+        print("Total number of followers: ", numFollowers)
+
+        # Click on followers
+        self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[1]/div/div/div/div[1]/div[1]/section/main/div/header/section/ul/li[2]/a").click()
+        sleep(5)
 
         # To scroll till last in the follower box. If followers count is quite high and 
         # your net is slow then increase the sleep(N)
-        followersBox  = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
-        for i in range(int(numFollowers/5)): 
+        followersBox  = self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[2]")
+        
+        for i in range(int(numFollowers/3)): 
             self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', followersBox)
-            sleep(1)
-            print("Extracting friends %",round((i/(numFollowers/5)*100),2),"from","%100")
+            sleep(2)
+            print("Extracting friends %",round((i/(numFollowers/3)*100),2),"from","%100")
 
-        # Get the all the followers
-        fList  = self.driver.find_elements_by_xpath("//div[@class='PZuss']//li")
+        # Get all the followers
+        fList  = self.driver.find_elements_by_xpath("//div[@class='_aano']//li")        
         
         # Get the user names of all the followers
         followersList = []
@@ -69,29 +72,32 @@ class InstaBot:
             txt = ele.text
             followersList.append(txt.split("\n")[0])
 
+        print("All the followers: ", followersList)
+        print("Number of followers extracted: ", len(followersList))
         print("Followers count ended")
 
         # Close followers box
-        self.driver.find_elements_by_xpath("/html/body/div[4]/div/div/div[1]/div/div[2]/button")[0].click()
+        self.driver.find_elements_by_xpath("/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[1]/div/div[3]/div/button")[0].click()
         sleep(1)
 
-        # Click on following
-        self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[3]/a").click()
-        sleep(5)
-
         # Number of following
-        numFollowing = int(self.driver.find_element_by_xpath("/html/body/div[1]/section/main/div/header/section/ul/li[3]/a/span").text.replace(",","")) 
+        numFollowing = int(self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[1]/div/div/div/div[1]/div[1]/section/main/div/header/section/ul/li[3]/a/div/span").text.replace(",","")) 
+        print("Total number of people you follow: ", numFollowing)
+
+        # Click on following
+        self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[1]/div/div/div/div[1]/div[1]/section/main/div/header/section/ul/li[3]/a").click()
+        sleep(5)
 
         # To scroll till last in the following box. If followers count is quite high and 
         # your net is slow then increase the sleep(N)
-        followingBox  = self.driver.find_element_by_xpath("/html/body/div[4]/div/div/div[2]")
-        for i in range(int(numFollowing/5)): 
+        followingBox  = self.driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[2]/div/div/div/div/div/div/div/div[3]")
+        for i in range(int(numFollowing/3)): 
             self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollTop + arguments[0].offsetHeight;', followingBox)
-            sleep(1)
-            print("Extracting friends %",round((i/(numFollowing/5)*100),2),"from","%100")
+            sleep(2)
+            print("Extracting friends %",round((i/(numFollowing/3)*100),2),"from","%100")
 
         # Get the all the followers
-        fList  = self.driver.find_elements_by_xpath("//div[@class='PZuss']//li")
+        fList  = self.driver.find_elements_by_xpath("//div[@class='_aano']//li")
         
         # Get the user names of all the followers
         followingList = []
@@ -99,6 +105,8 @@ class InstaBot:
             txt = ele.text
             followingList.append(txt.split("\n")[0])
 
+        print("All the People you follow: ", followingList)
+        print("Number of people you follow extracted: ", len(followingList))
         print("Following count ended")
 
         # Get the accounts who you doesn't follow back
@@ -106,6 +114,9 @@ class InstaBot:
         for account in followingList:
             if account not in followersList:
                 unFollowingList.append(account)
+
+        print("Number of people who dont follow back: ", len(unFollowingList))
+        print("People who don't follow back: ", unFollowingList)
 
         fileName = userId.replace(".","")
 
@@ -127,8 +138,8 @@ class InstaBot:
 
 
 if __name__ == "__main__":
-    credentialsPath = sys.argv[1]
-    uIdList = ast.literal_eval(sys.argv[2])
+    credentialsPath = "credentials.yml"
+    uIdList = ["booksntrekks"]
 
     with open(credentialsPath, "r") as yamlFile:
         cred = yaml.safe_load(yamlFile)
